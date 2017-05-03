@@ -12,14 +12,21 @@ else:
 lista = directory + "/converted/list"
 bash_commands = "mkdir %s/converted && ls %s | grep \".\" > %s" % (directory, directory, lista)
 
+
 os.system(bash_commands)
 for input_file in open(lista).readlines():
     input_file = input_file.strip()
-    output_file =input_file[:input_file.find(".")]
-    ffmpeg = "ffmpeg -i \"%s/%s\" -b:a 128 \"%s/converted/%s.mp3\"" % (
-    directory, input_file, directory, output_file)
-    print ffmpeg
-    os.system(ffmpeg)
+    if (input_file[-4:] != ".mp3"):
+        print input_file
+        output_file =input_file[: input_file.find(".")]
+        print output_file
+        ffmpeg = "ffmpeg -i \"%s/%s\" -b:a 128 \"%s/converted/%s.mp3\"" % (
+        directory, input_file, directory, output_file)
+        print ffmpeg
+        os.system(ffmpeg)
+    else:
+        pass
+
 if (raw_input("\nDelete original files? [y/n]\n>") == "n"):
     os.remove(lista)
 else:
