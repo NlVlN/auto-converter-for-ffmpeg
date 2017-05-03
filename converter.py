@@ -11,7 +11,6 @@ else:
 
 lista = directory + "/converted/list"
 bash_commands = "mkdir %s/converted && ls %s | grep \".\" > %s" % (directory, directory, lista)
-#print bash_commands
 
 os.system(bash_commands)
 for input_file in open(lista).readlines():
@@ -21,7 +20,6 @@ for input_file in open(lista).readlines():
     directory, input_file, directory, output_file)
     print ffmpeg
     os.system(ffmpeg)
-    # subprocess.call(ffmpeg)
 if (raw_input("\nDelete original files? [y/n]\n>") == "n"):
     os.remove(lista)
 else:
